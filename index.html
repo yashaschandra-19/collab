@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Artists Dashboard</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e1e1e;
+      color: white;
+    }
+    h1 {
+      font-size: 2.5rem;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .artist-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+    .artist-card:hover {
+      transform: scale(1.05);
+    }
+    .artist-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .artist-info {
+      margin-top: 10px;
+    }
+    .artist-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+    .artist-info p {
+      color: #777;
+      font-size: 1rem;
+    }
+    .add-artist-form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .add-artist-form input,
+    .add-artist-form textarea,
+    .add-artist-form button {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .add-artist-form button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    .add-artist-form button:hover {
+      background-color: #45a049;
+    }
+    .add-artist-form input[type="file"] {
+      border: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>3D Artists Dashboard</h1>
+    <p>Manage Artists and their 3D Collections</p>
+  </header>
+
+  <div class="container" id="artist-list">
+    <!-- Artist cards will be dynamically added here -->
+  </div>
+
+  <div class="add-artist-form">
+    <h2>Add New Artist</h2>
+    <input type="text" id="artist-name" placeholder="Artist Name" required>
+    <textarea id="artist-bio" rows="4" placeholder="Artist Bio"></textarea>
+    <input type="file" id="artist-image" accept="image/*">
+    <button onclick="addArtist()">Add Artist</button>
+  </div>
+
+  <script>
+    const artistList = [
+      {
+        name: "Jane Doe",
+        bio: "A talented 3D artist specializing in character modeling.",
+        image: "https://via.placeholder.com/300"
+      },
+      {
+        name: "John Smith",
+        bio: "Expert in environment and landscape 3D design.",
+        image: "https://via.placeholder.com/300"
+      }
+    ];
+
+    const artistListContainer = document.getElementById("artist-list");
+
+    function displayArtists() {
+      artistListContainer.innerHTML = "";
+      artistList.forEach(artist => {
+        const card = document.createElement("div");
+        card.classList.add("artist-card");
+
+        card.innerHTML = `
+          <img src="${artist.image}" alt="${artist.name}" class
