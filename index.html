@@ -139,4 +139,41 @@
         card.classList.add("artist-card");
 
         card.innerHTML = `
-          <img src="${artist.image}" alt="${artist.name}" class
+          <img src="${artist.image}" alt="${artist.name}" class="artist-image">
+          <div class="artist-info">
+            <h3>${artist.name}</h3>
+            <p>${artist.bio}</p>
+          </div>
+        `;
+        artistListContainer.appendChild(card);
+      });
+    }
+
+    function addArtist() {
+      const name = document.getElementById("artist-name").value;
+      const bio = document.getElementById("artist-bio").value;
+      const image = document.getElementById("artist-image").files[0];
+
+      if (name && bio && image) {
+        const reader = new FileReader();
+        reader.onloadend = function () {
+          const newArtist = {
+            name: name,
+            bio: bio,
+            image: reader.result
+          };
+          artistList.push(newArtist);
+          displayArtists();
+        };
+        reader.readAsDataURL(image);
+      } else {
+        alert("Please fill in all fields and upload an image.");
+      }
+    }
+
+    // Initial display of artists
+    displayArtists();
+  </script>
+
+</body>
+</html>
